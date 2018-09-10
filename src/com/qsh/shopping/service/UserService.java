@@ -6,10 +6,10 @@ import com.qsh.shopping.model.User;
 
 public interface UserService {
 	/*用户注册*/
-	public User register(User person);
+	public User register(User user);
 	public boolean remove(int[] ids);
-	public boolean modify(User person);
-	public List<User> getPersons();
+	public boolean modify(User user);
+	public List<User> getUsers();
 	public boolean login(String name, String password);
 	public boolean checkUserName(String checkUserName);
 }

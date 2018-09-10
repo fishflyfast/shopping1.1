@@ -2,6 +2,8 @@ package com.qsh.shopping.dao.impl;
 
 import java.util.List;
 
+import javax.annotation.Resource;
+
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -11,6 +13,17 @@ import com.qsh.shopping.model.User;
 import com.qsh.shopping.util.HibernateUtil;
 
 public class UserDaoImpl implements UserDao{
+
+	private HibernateUtil hibernateUtil;
+	
+	public HibernateUtil getHibernateUtil() {
+		return hibernateUtil;
+	}
+
+	@Resource
+	public void setHibernateUtil(HibernateUtil hibernateUtil) {
+		this.hibernateUtil = hibernateUtil;
+	}
 
 	@Override
 	public User save(User user) {
