@@ -2,48 +2,31 @@ package com.qsh.shopping.util;
 
 import java.util.List;
 
+import javax.annotation.Resource;
+
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
-import org.hibernate.cfg.Configuration;
 
 public class HibernateUtil {
 
-	private static Configuration configuration;
-	private static SessionFactory sessionFactory;
+	private SessionFactory sessionFactory;
 	
-	static{
-		try{
-			configuration = new Configuration().configure();
-			sessionFactory = configuration.buildSessionFactory();
-		}catch(Throwable ex){
-			ex.printStackTrace();
-		}
+	@Resource
+	public void setSessionFactory(SessionFactory sessionFactory) {
+		this.sessionFactory = sessionFactory;
 	}
-	
-	public static SessionFactory getSessionFactory(){
+
+	public SessionFactory getSessionFactory(){
 		return sessionFactory;
-	}
-	
-	public static Configuration getConfiguration(){
-		return configuration;
-	}
-	public static void rebuildSessionFactory(){
-		synchronized(sessionFactory){
-			try{
-				sessionFactory = getConfiguration().buildSessionFactory();
-			}catch(Exception e){
-				e.printStackTrace();
-			}
-		}
 	}
 	
 	/** 获取session
 	 * @return
 	 */
-	public static Session getSession(){
+	public Session getSession(){
 		Session session = null;
 		try{
 			session = sessionFactory.openSession();
@@ -53,7 +36,7 @@ public class HibernateUtil {
 		return session;
 	}
 	
-	public static void close(){
+	public void close(){
 		try{
 			sessionFactory.close();
 		}catch(Exception e){
@@ -88,12 +71,12 @@ public class HibernateUtil {
 	 * @param hql
 	 * @return
 	 */
-	public static List exeQuery(String hql){
+	public List exeQuery(String hql){
 		List list = null;
 		Transaction transaction = null;
 		Session session = null;
 		try{
-			session = HibernateUtil.getSession();
+			session = getSession();
 			transaction = session.beginTransaction();
 			
 			list = session.createQuery(hql).list();
@@ -104,7 +87,7 @@ public class HibernateUtil {
 		}catch(Exception e){
 			e.printStackTrace();
 		}finally{
-			HibernateUtil.closeSession(session);
+			closeSession(session);
 		}
 		return list;
 	}
@@ -115,12 +98,12 @@ public class HibernateUtil {
 	 * @param end 结束位置
 	 * @return
 	 */
-	public static List<Object> exeQueryPage(String hql, int start, int end){
+	public List<Object> exeQueryPage(String hql, int start, int end){
 		List list = null;
 		Transaction transaction = null;
 		Session session = null;
 		try{
-			session = HibernateUtil.getSession();
+			session = getSession();
 			transaction = session.beginTransaction();
 			
 			Query query = session.createQuery(hql);
@@ -129,24 +112,23 @@ public class HibernateUtil {
 			list = query.list();
 			
 			transaction.commit();
-			HibernateUtil.closeSession(session);
 		}catch(HibernateException e){
 			e.printStackTrace();
 			HibernateUtil.rollbackTransaction(transaction);
 		}catch(Exception e){
 			e.printStackTrace();
 		}finally{
-			HibernateUtil.closeSession(session);
+			closeSession(session);
 		}
 		return list;
 	}
 	
-	public static boolean exeDelete(String hql){
+	public boolean exeDelete(String hql){
 		boolean flag = false;
 		Transaction transaction = null;
 		Session session = null;
 		try{
-			session = HibernateUtil.getSession();
+			session = getSession();
 			transaction = session.beginTransaction();
 			
 			session.createQuery(hql).executeUpdate();
@@ -154,11 +136,11 @@ public class HibernateUtil {
 			flag = true;
 		}catch(HibernateException e){
 			e.printStackTrace();
-			HibernateUtil.rollbackTransaction(transaction);
+			rollbackTransaction(transaction);
 		}catch(Exception e){
 			e.printStackTrace();
 		}finally{
-			HibernateUtil.closeSession(session);
+			closeSession(session);
 		}
 		return flag;
 	}

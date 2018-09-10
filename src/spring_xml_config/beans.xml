@@ -9,7 +9,43 @@
 
    <context:annotation-config/>
    
-   <bean id = "hibernateUtil" class = "com.qsh.shopping.util.HibernateUtil"></bean>
-   <bean id = "userDao" class = "com.qsh.shopping.dao.impl.UserDaoImpl"></bean>
-   <bean id = "userService" class = "com.qsh.shopping.service.impl.UserServieImpl"></bean>
+   <bean id="hibernateUtil" class="com.qsh.shopping.util.HibernateUtil"></bean>
+   <bean id="userDao" class="com.qsh.shopping.dao.impl.UserDaoImpl"></bean>
+   <bean id="userService" class="com.qsh.shopping.service.impl.UserServieImpl"></bean>
+   
+   <!-- Spring和Hibernate整合 -->
+   <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="systemPropertiesModeName" value="SYSTEM_PROPERTIES_MODE_OVERRIDE" />  
+        <property name="ignoreResourceNotFound" value="false" />
+	    <property name="locations">
+	        <value>classpath:spring_xml_config/jdbc.properties</value>
+	    </property>
+   </bean>
+   
+   <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+       <property name="driverClassName" value="${jdbc.driverClassName}"/>
+       <property name="url" value="${jdbc.url}"/>
+       <property name="username" value="${jdbc.username}"/>
+       <property name="password" value="${jdbc.password}"/>
+   </bean>
+   
+   <context:property-placeholder location="spring_xml_config/jdbc.properties" />
+
+	<bean id="sessionFactory"
+		class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<property name="packagesToScan">
+			<list>
+				<value>com.qsh.shopping.model</value>
+			</list>
+		</property>
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
+				<prop key="hibernate.show_sql">true</prop>
+				<prop key="hibernate.format_sql">true</prop>
+				<prop key="hibernate.hbm2ddl.auto">update</prop>
+			</props>
+		</property>
+	</bean>
 </beans>

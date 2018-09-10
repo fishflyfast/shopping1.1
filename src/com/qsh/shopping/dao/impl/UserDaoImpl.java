@@ -31,7 +31,7 @@ public class UserDaoImpl implements UserDao{
 		Transaction transaction = null;
 		Session session = null;
 		try{
-			session = HibernateUtil.getSession();
+			session = hibernateUtil.getSession();
 			transaction = session.beginTransaction();
 			/*教程中可以这样干,实际操作不行*/
 //			u = (User)session.save(user);
@@ -45,7 +45,7 @@ public class UserDaoImpl implements UserDao{
 		}catch(Exception e){
 			e.printStackTrace();
 		}finally{
-			HibernateUtil.closeSession(session);
+			hibernateUtil.closeSession(session);
 		}
 		return user;
 	}
@@ -53,7 +53,7 @@ public class UserDaoImpl implements UserDao{
 	@Override
 	public boolean delete(int id) {
 		String hql = "delete from User where id=" + id;
-		return HibernateUtil.exeDelete(hql);
+		return hibernateUtil.exeDelete(hql);
 	}
 
 	@Override
@@ -63,7 +63,7 @@ public class UserDaoImpl implements UserDao{
 		Transaction transaction = null;
 		Session session = null;
 		try{
-			session = HibernateUtil.getSession();
+			session = hibernateUtil.getSession();
 			transaction = session.beginTransaction();
 
 			u = (User)session.load(User.class, user.getId());
@@ -76,7 +76,6 @@ public class UserDaoImpl implements UserDao{
 			u.setRegDate(user.getRegDate());
 			
 			transaction.commit();
-			HibernateUtil.closeSession(session);
 			flag = true;
 		}catch(HibernateException he){
 			he.printStackTrace();
@@ -84,7 +83,7 @@ public class UserDaoImpl implements UserDao{
 		}catch(Exception e){
 			e.printStackTrace();
 		}finally{
-			HibernateUtil.closeSession(session);
+			hibernateUtil.closeSession(session);
 		}
 		return flag;
 	}
@@ -92,13 +91,13 @@ public class UserDaoImpl implements UserDao{
 	@Override
 	public List<User> findAll() {
 		String hql = "from User";
-		return HibernateUtil.exeQuery(hql);
+		return hibernateUtil.exeQuery(hql);
 	}
 
 	@Override
 	public boolean login(String name, String password) {
 		String hql = "from User name=" + name + " and password=" + password;
-		if(HibernateUtil.exeQuery(hql).size() > 0){
+		if(hibernateUtil.exeQuery(hql).size() > 0){
 			return true;
 		}
 		return false;
@@ -107,7 +106,7 @@ public class UserDaoImpl implements UserDao{
 	@Override
 	public boolean checkUserName(String username) {
 		String hql = "from User where name='" + username + "'";
-		List list = HibernateUtil.exeQuery(hql);
+		List list = hibernateUtil.exeQuery(hql);
 		return !list.isEmpty();
 	}
 
