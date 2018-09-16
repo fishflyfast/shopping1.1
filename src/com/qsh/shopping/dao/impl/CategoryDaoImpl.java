@@ -8,11 +8,12 @@ import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
-import com.qsh.shopping.dao.UserDao;
+import com.qsh.shopping.dao.CategoryDao;
+import com.qsh.shopping.model.Category;
 import com.qsh.shopping.model.User;
 import com.qsh.shopping.util.HibernateUtil;
 
-public class UserDaoImpl implements UserDao{
+public class CategoryDaoImpl implements CategoryDao {
 
 	private HibernateUtil hibernateUtil;
 	
@@ -24,9 +25,8 @@ public class UserDaoImpl implements UserDao{
 	public void setHibernateUtil(HibernateUtil hibernateUtil) {
 		this.hibernateUtil = hibernateUtil;
 	}
-
 	@Override
-	public User save(User user) {
+	public Category save(Category category) {
 		Transaction transaction = null;
 		Session session = null;
 		try{
@@ -34,8 +34,8 @@ public class UserDaoImpl implements UserDao{
 			transaction = session.beginTransaction();
 			/*教程中可以这样干,实际操作不行*/
 //			u = (User)session.save(user);
-			Integer id = (Integer)session.save(user);
-			user.setId(id);
+			Integer id = (Integer)session.save(category);
+			category.setId(id);
 			
 			transaction.commit();
 		}catch(HibernateException he){
@@ -46,33 +46,55 @@ public class UserDaoImpl implements UserDao{
 		}finally{
 			hibernateUtil.closeSession(session);
 		}
-		return user;
+		return category;
+	}
+	
+	@Override
+	public Category saveChildCategory(int parent, Category category) {
+		Transaction transaction = null;
+		Session session = null;
+		boolean flag = false;
+		try{
+			session = hibernateUtil.getSession();
+			transaction = session.beginTransaction();
+			Category pC = (Category)session.get(Category.class, parent);
+			pC.setLeaf(false);
+			category.setParent(parent);
+			this.save(category);
+			
+			transaction.commit();
+			flag = true;
+		}catch(HibernateException he){
+			he.printStackTrace();
+			hibernateUtil.rollbackTransaction(transaction);
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally{
+			hibernateUtil.closeSession(session);
+		}
+		return category;
 	}
 
 	@Override
 	public boolean delete(int id) {
-		String hql = "delete from User where id=" + id;
+		String hql = "delete from Category where id=" + id;
 		return hibernateUtil.exeDelete(hql);
 	}
 
 	@Override
-	public boolean update(User user) {
+	public boolean update(Category category) {
 		boolean flag = false;
-		User u = null;
+		Category c = null;
 		Transaction transaction = null;
 		Session session = null;
 		try{
 			session = hibernateUtil.getSession();
 			transaction = session.beginTransaction();
 
-			u = (User)session.load(User.class, user.getId());
-			u.setName(user.getName());
-			u.setPassword(user.getPassword());
-			u.setAddr(user.getAddr());
-			u.setEmail(user.getEmail());
-			u.setPhone(user.getPhone());
-			u.setQQ(user.getQQ());
-			u.setRegDate(user.getRegDate());
+			c = (Category)session.load(Category.class, category.getId());
+			c.setDescription(category.getDescription());
+			c.setText(category.getText());
+			c.setParent(category.getParent());
 			
 			transaction.commit();
 			flag = true;
@@ -88,25 +110,21 @@ public class UserDaoImpl implements UserDao{
 	}
 
 	@Override
-	public List<User> findAll() {
-		String hql = "from User";
+	public List<Category> findAll() {
+		String hql = "from Category";
 		return hibernateUtil.exeQuery(hql);
 	}
 
 	@Override
-	public boolean login(String name, String password) {
-		String hql = "from User name=" + name + " and password=" + password;
-		if(hibernateUtil.exeQuery(hql).size() > 0){
-			return true;
-		}
-		return false;
+	public List<Category> findByparent(int pId) {
+		String hql = "from Category where parent=" + pId;
+		return hibernateUtil.exeQuery(hql);
 	}
 
 	@Override
-	public boolean checkUserName(String username) {
-		String hql = "from User where name='" + username + "'";
-		List list = hibernateUtil.exeQuery(hql);
-		return !list.isEmpty();
+	public List<Category> findTopCategory() {
+		String hql = "from Category where parent=0";
+		return hibernateUtil.exeQuery(hql);
 	}
 
 }

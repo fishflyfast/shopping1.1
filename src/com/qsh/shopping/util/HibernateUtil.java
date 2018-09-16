@@ -44,7 +44,7 @@ public class HibernateUtil {
 		}
 	}
 	
-	public static void closeSession(Session session){
+	public void closeSession(Session session){
 		try{
 			if(null != session){
 				session.close();
@@ -57,7 +57,7 @@ public class HibernateUtil {
 	 * 事务回滚
 	 * @param transaction
 	 */
-	public static void rollbackTransaction(Transaction transaction){
+	public void rollbackTransaction(Transaction transaction){
 		try{
 			if(null != transaction){
 				transaction.rollback();
@@ -83,7 +83,7 @@ public class HibernateUtil {
 			transaction.commit();
 		}catch(HibernateException e){
 			e.printStackTrace();
-			HibernateUtil.rollbackTransaction(transaction);
+			rollbackTransaction(transaction);
 		}catch(Exception e){
 			e.printStackTrace();
 		}finally{
@@ -98,7 +98,7 @@ public class HibernateUtil {
 	 * @param end 结束位置
 	 * @return
 	 */
-	public List<Object> exeQueryPage(String hql, int start, int end){
+	public List exeQueryPage(String hql, int start, int end){
 		List list = null;
 		Transaction transaction = null;
 		Session session = null;
@@ -114,7 +114,7 @@ public class HibernateUtil {
 			transaction.commit();
 		}catch(HibernateException e){
 			e.printStackTrace();
-			HibernateUtil.rollbackTransaction(transaction);
+			rollbackTransaction(transaction);
 		}catch(Exception e){
 			e.printStackTrace();
 		}finally{
