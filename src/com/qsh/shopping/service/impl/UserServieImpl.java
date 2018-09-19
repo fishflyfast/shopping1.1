@@ -49,9 +49,8 @@ public class UserServieImpl implements UserService {
 	}
 
 	@Override
-	public boolean login(String name, String password) {
-		// TODO Auto-generated method stub
-		return false;
+	public User login(String name, String password) {
+		return userDao.login(name, password);
 	}
 
 	@Override

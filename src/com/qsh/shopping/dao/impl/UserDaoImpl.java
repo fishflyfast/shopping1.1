@@ -94,12 +94,14 @@ public class UserDaoImpl implements UserDao{
 	}
 
 	@Override
-	public boolean login(String name, String password) {
-		String hql = "from User name=" + name + " and password=" + password;
-		if(hibernateUtil.exeQuery(hql).size() > 0){
-			return true;
+	public User login(String name, String password) {
+		String hql = "from User where name='" + name + "' and password='" + password + "'";
+		User user = null;
+		List<User> users = hibernateUtil.exeQuery(hql);
+		if(users.size() == 1){
+			user = users.get(0);
 		}
-		return false;
+		return user;
 	}
 
 	@Override

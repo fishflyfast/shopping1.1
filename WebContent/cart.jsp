@@ -16,7 +16,7 @@
 	border-bottom: #000 1px solid;
 }
 --></style>
-<script language="javascript"><!--
+<script language="javascript">
 function senfe(o,a,b,c,d){
 	var t=document.getElementById(o).getElementsByTagName("tr");
 	for(var i=0;i<t.length;i++){
@@ -38,7 +38,7 @@ function senfe(o,a,b,c,d){
 		}
 	}
 }
---></script>
+</script>
 
 
 
@@ -96,7 +96,7 @@ function senfe(o,a,b,c,d){
 			<script language="javascript"><!--
 			//senfe("表格名称","奇数行背景","偶数行背景","鼠标经过背景","点击后背景");
 			senfe("senfe","#fff","#ccc","#cfc","#f00");
-			--></script>
+		</script>
 
 			
 			<center>

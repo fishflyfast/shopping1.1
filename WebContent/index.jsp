@@ -198,7 +198,7 @@ window.onload = function ()
 		aBtn[i].onmouseover = function ()
 		{
 			index = this.index;
-			cutover()
+			cutover();
 		}
 	}
 	
@@ -272,9 +272,9 @@ window.onload = function ()
                 S.style.left = e.clientX - LEFT + "px";
                 S.style.top = e.clientY - TOP + "px";
             }
-        }
+        };
         document.onmouseup=function(){IsMousedown=false;}
-   }
+   };
 </SCRIPT>
 <!-- 登陆弹出窗口end -->
 
@@ -302,7 +302,7 @@ var ScrollTimer = window.setInterval("scrollBG(307)", 64);	//设定每次移动�
       <td width="200" rowspan="2" valign="top" bgcolor="#FFFFFF"><img src="images/logo.jpg" /></td>
       <td width="824" height="26" valign="top"><div align="right">
       
-      <font color="red" size="3">${username }</font>hi，<c:if test="${user.name==null}">游客</c:if><font size="6" color="red">${user.name } </font>欢迎来我佳炒货网上商城！<a href="index.do">首页</a>请<a href="javascript:" onClick="bgDiv.style.display='';login.style.display='';">登录</a> <a href="register.jsp">免费注册</a> <c:if test="${user.name!=null}"><a href="searchOrderByUsername.do?username=${user.name }">我的订单</a></c:if> <a href="#" class="btn">
+      <font color="red" size="3">${username}</font>hi，<c:if test="${user.name==null}">游客</c:if><font size="6" color="red">${user.name } </font>欢迎来我佳炒货网上商城！<a href="index.do">首页</a>请<a href="javascript:" onClick="bgDiv.style.display='';login.style.display='';">登录</a> <a href="register.jsp">免费注册</a> <c:if test="${user.name!=null}"><a href="searchOrderByUsername.do?username=${user.name }">我的订单</a></c:if> <a href="#" class="btn">
 	  <span class="btn_word"><img src="images/cart.jpg" />购物车${size>0?size:0 }种&nbsp;<a href="unlogin.do">注销</a>&nbsp;<a href="index.html">后台管理</a></span>
 	  <span class="btn_right"></span>
 	</a>
@@ -438,7 +438,7 @@ var ScrollTimer = window.setInterval("scrollBG(307)", 64);	//设定每次移动�
 				</div>
 				</div>
 				<script>
-				<!--
+				
 				var speed=30;
 				var tab=document.getElementById("demo");
 				var tab1=document.getElementById("demo1");
@@ -454,7 +454,7 @@ var ScrollTimer = window.setInterval("scrollBG(307)", 64);	//设定每次移动�
 				var MyMar=setInterval(Marquee,speed);
 				tab.onmouseover=function() {clearInterval(MyMar)};
 				tab.onmouseout=function() {MyMar=setInterval(Marquee,speed)};
-				-->
+				
 				</script>
 	  </td>
     </tr>
