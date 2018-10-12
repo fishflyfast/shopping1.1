@@ -10,6 +10,7 @@ public interface UserService {
 	public boolean remove(int[] ids);
 	public boolean modify(User user);
 	public List<User> getUsers();
+	public List<User> getUsers(int start, int end);
 	public User login(String name, String password);
 	public boolean checkUserName(String checkUserName);
 }

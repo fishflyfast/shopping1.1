@@ -113,5 +113,10 @@ public class ProductDAOImpl implements ProductDao {
 		}
 		return flag;
 	}
+	@Override
+	public List<Product> findAll(int start, int end) {
+		String hql = "from Product";
+		return hibernateUtil.exeQueryPage(hql, start, end);
+	}
 
 }

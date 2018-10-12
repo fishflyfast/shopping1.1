@@ -5,20 +5,20 @@ Ext.define("core.app.controller.MainController",{
 		var self = this;
 		
 		/**显示登陆窗口*/
-		var loginWin =Ext.create("core.app.view.LoginWindow");
-		loginWin.show();
+//		var loginWin = Ext.create("core.app.view.LoginWindow");
+//		loginWin.show();
 		
 		/**公用添加页面的方法*/
 		/**
 		 * 动态加载controller并渲染它的主窗体
 		 */
-		this.addFunItem=function(funInfo){
+		this.addFunItem = function(funInfo){
 			if(funInfo){
-				var mainView=funInfo.mainView;
-				var funPanel=mainView.down(funInfo.funViewXtype);
+				var mainView = funInfo.mainView;
+				var funPanel = mainView.down(funInfo.funViewXtype);
 				if(!funPanel){
-					self.application.getController(funInfo.funController).init();
-					funPanel=Ext.create(funInfo.funViewName);
+					self.application.getController(funInfo.funController);//此处调用init方法会导致按钮的响应出现两次
+					funPanel = Ext.create(funInfo.funViewName);
 					mainView.add(funPanel);
 					mainView.setActiveTab(funPanel);
 				}else{									
@@ -79,7 +79,7 @@ Ext.define("core.app.controller.MainController",{
 			/**注销*/
 			"topview button[ref=logout]" : {
 				click: function(btn){
-					var dis=Ext.getCmp("displaylogin");
+					var dis = Ext.getCmp("displaylogin");
 					dis.setValue("<font color=white><b>未登录</b></font>");
 								
 					Ext.util.Cookies.clear("autologin");
@@ -106,38 +106,38 @@ Ext.define("core.app.controller.MainController",{
 			
 			"westview treepanel":{
 				itemclick:function(tree,record,item,index,e,eOpts){
-					var mainView=tree.up("mainviewlayout").down("centerview");
+					var mainView = tree.up("mainviewlayout").down("centerview");
 					/**用户管理*/
 					if(record.data["id"]=="usermanager"){
 						self.addFunItem({
-							mainView:mainView,
-							funViewXtype:"userlayout",
-							funController:"core.user.controller.UserController",
-							funViewName:"core.user.view.UserLayout"
+							mainView : mainView,
+							funViewXtype : "userlayout",
+							funController : "core.user.controller.UserController",
+							funViewName : "core.user.view.UserLayout"
 						});
 						/*类别管理*/
 					}else if(record.data["id"]=="category-product"){
 						self.addFunItem({
-							mainView:mainView,
-							funViewXtype:"categorylayout",
-							funController:"core.category.controller.CategoryController",
-							funViewName:"core.category.view.CategoryLayout"
+							mainView : mainView,
+							funViewXtype : "categorylayout",
+							funController : "core.category.controller.CategoryController",
+							funViewName : "core.category.view.CategoryLayout"
 						});
 						/**商品管理*/
 					}else if(record.data["id"]=="productmanager"){
 						self.addFunItem({
-							mainView:mainView,
-							funViewXtype:"productlayout",
-							funController:"core.product.controller.ProductController",
-							funViewName:"core.product.view.ProductLayout"
+							mainView : mainView,
+							funViewXtype : "productlayout",
+							funController : "core.product.controller.ProductController",
+							funViewName : "core.product.view.ProductLayout"
 						});
 						/**订单管理*/
 					}else if(record.data["id"]=="salesorderment"){
 						self.addFunItem({
-							mainView:mainView,
-							funViewXtype:"salesorderlayout",
-							funController:"core.salesorder.controller.SalesOrderController",
-							funViewName:"core.salesorder.view.SalesOrderLayout"
+							mainView : mainView,
+							funViewXtype : "salesorderlayout",
+							funController : "core.salesorder.controller.SalesOrderController",
+							funViewName : "core.salesorder.view.SalesOrderLayout"
 						});	
 					}
 				}//itemclick end

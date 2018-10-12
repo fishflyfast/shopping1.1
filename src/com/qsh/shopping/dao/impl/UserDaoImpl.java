@@ -92,6 +92,12 @@ public class UserDaoImpl implements UserDao{
 		String hql = "from User";
 		return hibernateUtil.exeQuery(hql);
 	}
+	
+	@Override
+	public List<User> findAll(int start, int end) {
+		String hql = "from User";
+		return hibernateUtil.exeQueryPage(hql, start, end);
+	}
 
 	@Override
 	public User login(String name, String password) {
@@ -110,5 +116,4 @@ public class UserDaoImpl implements UserDao{
 		List list = hibernateUtil.exeQuery(hql);
 		return !list.isEmpty();
 	}
-
 }

@@ -14,7 +14,7 @@ Ext.define("core.app.view.TopView", {
 				x : 0,
 				y : 0,
 				width : 230,
-				height : 10,
+				height : 50,
 				//border:0,
 				html : "<img src='./core/css/imgs/logo/logo.gif'/>"
 			},{

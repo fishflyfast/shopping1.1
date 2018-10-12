@@ -49,6 +49,11 @@ public class UserServieImpl implements UserService {
 	}
 
 	@Override
+	public List<User> getUsers(int start, int end) {
+		return userDao.findAll(start, end);
+	}
+	
+	@Override
 	public User login(String name, String password) {
 		return userDao.login(name, password);
 	}
@@ -57,5 +62,4 @@ public class UserServieImpl implements UserService {
 	public boolean checkUserName(String userName) {
 		return userDao.checkUserName(userName);
 	}
-
 }

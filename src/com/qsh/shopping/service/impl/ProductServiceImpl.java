@@ -30,6 +30,11 @@ public class ProductServiceImpl implements ProductService {
 		return ProductDao.findAll();
 	}
 
+	@Override
+	public List<Product> findAll(int start, int end) {
+		return this.ProductDao.findAll(start, end);
+	}
+
 	public List<Product> findByKeyword(String keyword) {
 		// TODO Auto-generated method stub
 		return ProductDao.findByKeyword(keyword);
@@ -52,5 +57,4 @@ public class ProductServiceImpl implements ProductService {
 		// TODO Auto-generated method stub
 		return findAll().size();
 	}
-
 }

@@ -18,4 +18,10 @@ public interface ProductService {
 	public List<Product> findByKeyword(String keyword);
 	/**返回用的的记录数*/
 	public long count();
+	/** 分页查询
+	 * @param start
+	 * @param limit
+	 * @return
+	 */
+	public List<Product> findAll(int start, int end);
 }

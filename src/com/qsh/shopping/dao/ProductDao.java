@@ -11,4 +11,5 @@ public interface ProductDao {
 	public boolean update(Product product);
 	public List<Product> findAll();
 	public List<Product> findByKeyword(String keyword);
+	public List<Product> findAll(int start, int end);
 }
