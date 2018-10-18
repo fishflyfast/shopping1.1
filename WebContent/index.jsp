@@ -198,7 +198,7 @@ window.onload = function ()
 		aBtn[i].onmouseover = function ()
 		{
 			index = this.index;
-			cutover()
+			cutover();
 		}
 	}
 	
@@ -206,7 +206,7 @@ window.onload = function ()
 	{
 		for (i = 0; i < aBtn.length; i++) aBtn[i].className = "";
 		aBtn[index].className = "current";			
-		startMove(-(index * aImg[0].offsetHeight))
+		startMove(-(index * aImg[0].offsetHeight));
 	}
 	
 	function next()
@@ -214,7 +214,7 @@ window.onload = function ()
 		bOrder ? index++ : index--;
 		index <= 0 && (index = 0, bOrder = true);
 		index >= aBtn.length - 1 && (index = aBtn.length - 1, bOrder = false)
-		cutover()
+		cutover();
 	}
 	
 	playTimer = setInterval(next, 3000);
@@ -438,7 +438,7 @@ var ScrollTimer = window.setInterval("scrollBG(307)", 64);	//设定每次移动�
 				</div>
 				</div>
 				<script>
-				<!--
+				
 				var speed=30;
 				var tab=document.getElementById("demo");
 				var tab1=document.getElementById("demo1");
@@ -454,7 +454,7 @@ var ScrollTimer = window.setInterval("scrollBG(307)", 64);	//设定每次移动�
 				var MyMar=setInterval(Marquee,speed);
 				tab.onmouseover=function() {clearInterval(MyMar)};
 				tab.onmouseout=function() {MyMar=setInterval(Marquee,speed)};
-				-->
+				
 				</script>
 	  </td>
     </tr>

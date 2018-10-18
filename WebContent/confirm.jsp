@@ -21,7 +21,7 @@
 	font-weight: bold;
 }
 --></style>
-<script language="javascript"><!--
+<script language="javascript">
 function senfe(o,a,b,c,d){
 	var t=document.getElementById(o).getElementsByTagName("tr");
 	for(var i=0;i<t.length;i++){
@@ -43,7 +43,7 @@ function senfe(o,a,b,c,d){
 		}
 	}
 }
---></script>
+</script>
 
 
 
