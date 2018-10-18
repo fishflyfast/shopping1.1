@@ -96,9 +96,8 @@ function senfe(o,a,b,c,d){
 			<script language="javascript"><!--
 			//senfe("表格名称","奇数行背景","偶数行背景","鼠标经过背景","点击后背景");
 			senfe("senfe","#fff","#ccc","#cfc","#f00");
-		</script>
 
-			
+		    </script>
 			<center>
 			共${totalPrice }元
 			<input type="submit" value="修改数量" />

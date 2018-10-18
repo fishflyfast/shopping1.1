@@ -206,7 +206,7 @@ window.onload = function ()
 	{
 		for (i = 0; i < aBtn.length; i++) aBtn[i].className = "";
 		aBtn[index].className = "current";			
-		startMove(-(index * aImg[0].offsetHeight))
+		startMove(-(index * aImg[0].offsetHeight));
 	}
 	
 	function next()
@@ -214,7 +214,7 @@ window.onload = function ()
 		bOrder ? index++ : index--;
 		index <= 0 && (index = 0, bOrder = true);
 		index >= aBtn.length - 1 && (index = aBtn.length - 1, bOrder = false)
-		cutover()
+		cutover();
 	}
 	
 	playTimer = setInterval(next, 3000);
