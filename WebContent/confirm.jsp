@@ -73,7 +73,7 @@ function senfe(o,a,b,c,d){
 <!-- 内容区 -->
 	<!-- 修改回馈信息显示 -->
 <center><font color="red">${msg }</font></center>
-<center>您一共购买了这么多的商品:${size}种</center>
+<center>您一共购买了这么多的商品:${size}种,${totalSize}件</center>
 
 <hr>
 <table style="margin:-8px 0 -8px 0;" width="100%" height="300" bgcolor="#D6F7F8">
@@ -87,7 +87,7 @@ function senfe(o,a,b,c,d){
 			<tr>
 				<td>客户名称：<input size="8" type=text name="user" value="${user.name }" readonly></td>
 				<td>定单编号：<input size="13" type=text name="orderCode" value="${orderCode }" readonly></td>
-				<td>日期：<input size="18" type=text name="orderDate" value="${date }" readonly></td>
+				<td>日期：<input size="18" type=text name="orderDate" value="${orderDate }" readonly></td>
 			</tr>
 			<tr>
 				<td colspan="1" >电&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;话：<input type=text name="phone" value="${user.phone }" size="10"></td>

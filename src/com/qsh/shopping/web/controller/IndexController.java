@@ -3,8 +3,10 @@ package com.qsh.shopping.web.controller;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -188,6 +190,8 @@ public class IndexController {
 		
 		mav.setViewName("cart");//返回的页面
 		mav.addObject("cartList", cart.getList());
+		mav.addObject("size", cart.getList().size());
+		mav.addObject("totalSize", cart.getTotalSize());
 		return mav;
 	}
 	
@@ -217,6 +221,10 @@ public class IndexController {
 			mav.addObject("cartList", list);
 			mav.addObject("size", list.size());
 			mav.addObject("user", user);
+			mav.addObject("totalPrice", cart.getTotalPrice());
+			mav.addObject("totalSize", cart.getTotalSize());
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-DD HH:mm:ss");
+			mav.addObject("orderDate", sdf.format(new Date()));
 			return mav;
 		}
 		mav.setViewName("cart");
@@ -224,6 +232,7 @@ public class IndexController {
 		mav.addObject("msg", "修改成功");
 		mav.addObject("size", list.size());
 		mav.addObject("totalPrice", cart.getTotalPrice());
+		mav.addObject("totalSize", cart.getTotalSize());
 		return mav;
 	}
 	

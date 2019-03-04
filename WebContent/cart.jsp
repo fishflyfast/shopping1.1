@@ -51,7 +51,7 @@ function senfe(o,a,b,c,d){
       <td width="200" rowspan="2" valign="top" bgcolor="#FFFFFF"><img src="images/logo.jpg" /></td>
       <td width="824" height="26" valign="top"><div align="right">
       
-       hi，<c:if test="${user.name==null}">游客</c:if><font size="6" color="red">${user.name } </font>欢迎来我佳炒货网上商城！<a href="index.do">首页</a>请<a href="#">登录</a> <a href="register.jsp">免费注册</a> <a href="#">我的订单</a> <a href="#" class="btn">
+       hi,<c:if test="${user.name==null}">游客</c:if><font size="6" color="red">${user.name } </font>欢迎来我佳炒货网上商城！<a href="index.do">首页</a>请<a href="#">登录</a> <a href="register.jsp">免费注册</a> <a href="#">我的订单</a> <a href="#" class="btn">
        <span class="btn_word"><img src="images/cart.jpg" />购物车${size }种&nbsp;<a href="unlogin.do">注销</a></span>
 	  <span class="btn_right"></span>
 	</a>
@@ -68,7 +68,7 @@ function senfe(o,a,b,c,d){
 <!-- 内容区 -->
 	<!-- 修改回馈信息显示 -->
 <center><font color="red">${msg }</font></center>
-<center>您一共购买了这么多的商品:${size}</center>
+<center>您一共购买了这么多的商品:${size}种, ${totalSize}件</center>
 
 <hr>
 <table style="margin:-8px 0 -8px 0;" width="100%" height="300" bgcolor="#D6F7F8">

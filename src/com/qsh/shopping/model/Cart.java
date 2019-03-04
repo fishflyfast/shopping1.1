@@ -37,7 +37,15 @@ public class Cart {
 	public double getTotalPrice(){
 		double total = 0.0;
 		for(CartItem item : list){
-			total +=item.getTotalPrice();
+			total += item.getTotalPrice();
+		}
+		return total;
+	}
+	
+	public int getTotalSize(){
+		int total = 0;
+		for(CartItem item : list){
+			total += item.getCount();
 		}
 		return total;
 	}
